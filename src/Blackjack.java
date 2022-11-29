@@ -2,20 +2,24 @@ public class Blackjack {
     private int startAmount; //amount of money to begin with to bet
     private boolean broke = false; //boolean that will determine when the game is over
     private int score = 0;
+    private int  winnings;
 
 
     public Blackjack(){
         startAmount = 500;
+        winnings = startAmount;
     }
     //constructor with a parameter for start amount
     public Blackjack(int a){
         startAmount = a;
+        winnings = a;
     }
     public void intro(){
         System.out.println("Welcome to Blackjack!");
         System.out.println("This is a game of both reasoning and luck.");
         System.out.println("You will first be asked how much money you want to bet.");
         System.out.println("Then, you will be dealt your hand and will be asked to either hit or stand.");
+        System.out.println("In this game, Aces are only worth 1 point.");
         System.out.println("The person closest to 21 wins!");
     }
 
@@ -37,9 +41,9 @@ public class Blackjack {
             if (randomize2 == 0){
                 return s + ".Spades";
             } else if (randomize2 == 1){
-                return s+ ".Clubs";
+                return s + ".Clubs";
             } else if (randomize2 == 2){
-                return s+ ".Hearts";
+                return s + ".Hearts";
             } else {
                 return s + ".Diamonds";
             }
@@ -79,6 +83,17 @@ public class Blackjack {
         return startAmount;
     }
 
+    public int getWinnings(){
+        return winnings;
+    }
+
+    public void subtractFromStartAmount(int s){
+        startAmount-=s;
+    }
+
+    public void changeWinnings(int s){
+        winnings +=s;
+    }
     public String getCard(String s){
         return s.substring(0, s.indexOf("."));
     }
@@ -87,9 +102,17 @@ public class Blackjack {
         return s.substring(s.indexOf(".")+1);
     }
 
-    public void play(int risk){
-        intro();
+    public int valueConverter(String s){
+        if (s.equals("Ace")){
+            return 1;
+        } else if (s.equals("Queen") || s.equals("King") || s.equals("Jack")){
+            return 10;
+        } else {
+            return Integer.parseInt(s);
+        }
+    }
 
+    public void play(int risk){
 
     }
 }
