@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Blackjack {
     private int startAmount; //amount of money to begin with to bet
     private boolean broke = false; //boolean that will determine when the game is over
@@ -113,6 +115,48 @@ public class Blackjack {
     }
 
     public void play(int risk){
+        Scanner classScan = new Scanner(System.in);
+        String d1 = pickCard();
+        int d1Val = valueConverter(getCard(d1));
+        String d2 = pickCard();
+        int d2Val = valueConverter(getCard(d2));
+        String p1 = pickCard();
+        int p1Val = valueConverter(getCard(p1));
+        String p2 = pickCard();
+        int p2Val = valueConverter(getCard(p2));
+        int pCombined = p1Val + p2Val;
+        int dCombined = d1Val + d2Val;
 
+        System.out.println("Your 1st card is: " + getCard(p1) + " of " + getSuit(p1));
+        System.out.println("Your 2nd card is: " + getCard(p2) + " of " + getSuit(p2));
+        System.out.println("That is a combined value of " + pCombined);
+
+        System.out.println("The dealer's shown card is: " + getCard(d2) + " of " + getSuit(d2));
+        System.out.println("That is a value of: " + d2Val);
+
+        while (true){
+            String userChoice = "";
+            while (!(userChoice.equals("h") || userChoice.equals("s"))){
+                System.out.println("Type 'h' to hit or 's' to stand.");
+                userChoice = classScan.nextLine();
+            }
+            if (userChoice.equals("h")){
+                String nextCard = pickCard();
+                int val = valueConverter(getCard(nextCard));
+                System.out.println("Your new card is: " + getCard(nextCard) + " of " + getSuit(nextCard));
+                if (val + pCombined>21){
+                    System.out.println("That is a bust! You lose.");
+                    startAmount-=risk;
+                    winnings-=risk;
+                    break;
+                } else {
+                    pCombined += val;
+                    System.out.println("Your new combined value is: " + pCombined);
+                }
+            } else {
+                System.out.println("Ok, your final value is: " + pCombined);
+                break;
+            }
+        }
     }
 }
