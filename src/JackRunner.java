@@ -24,5 +24,7 @@ public class JackRunner {
         game.subtractFromStartAmount(risk);
         System.out.println("Start amount: "+ game.getStartAmount());
         game.play(risk);
+        System.out.println("Total Winnings: $" + game.getWinnings());
+        System.out.println("Total Amount: $" + game.getStartAmount());
     }
 }

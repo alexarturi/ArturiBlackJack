@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Blackjack {
     private int startAmount; //amount of money to begin with to bet
-    private boolean broke = false; //boolean that will determine when the game is over
+    private boolean bust = false; //boolean that will determine when the game is over
     private int score = 0;
     private int  winnings;
 
@@ -134,7 +134,7 @@ public class Blackjack {
         System.out.println("The dealer's shown card is: " + getCard(d2) + " of " + getSuit(d2));
         System.out.println("That is a value of: " + d2Val);
 
-        while (true){
+        while (!bust){
             String userChoice = "";
             while (!(userChoice.equals("h") || userChoice.equals("s"))){
                 System.out.println("Type 'h' to hit or 's' to stand.");
@@ -144,11 +144,12 @@ public class Blackjack {
                 String nextCard = pickCard();
                 int val = valueConverter(getCard(nextCard));
                 System.out.println("Your new card is: " + getCard(nextCard) + " of " + getSuit(nextCard));
-                if (val + pCombined>21){
+                pCombined += val;
+                if (pCombined>21){
                     System.out.println("That is a bust! You lose.");
                     startAmount-=risk;
                     winnings-=risk;
-                    break;
+                    bust = true;
                 } else {
                     pCombined += val;
                     System.out.println("Your new combined value is: " + pCombined);
@@ -157,6 +158,34 @@ public class Blackjack {
                 System.out.println("Ok, your final value is: " + pCombined);
                 break;
             }
+        }
+
+        if (!bust){
+            if (dCombined<17){
+                String newCompCard = pickCard();
+                int cVal = valueConverter(getCard(newCompCard));
+                dCombined += cVal;
+                System.out.println("The computer drew a " + getCard(newCompCard) + " of " + getSuit(newCompCard));
+            } else {
+                System.out.println("The computer will stand as well.");
+            }
+        }
+        System.out.println();
+
+        if (!bust && dCombined>21){
+            System.out.println("You win!");
+            winnings += risk;
+            startAmount+=risk;
+        } else if (!bust && dCombined<pCombined){
+            System.out.println("You win!");
+            winnings+= risk;
+            startAmount += risk;
+        } else if (!bust && dCombined>pCombined){
+            System.out.println("You lose!");
+            winnings -= risk;
+            startAmount -= risk;
+        } else if (!bust && dCombined == pCombined){
+            System.out.println("It is a draw");
         }
     }
 }
