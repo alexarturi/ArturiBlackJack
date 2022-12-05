@@ -21,8 +21,7 @@ public class JackRunner {
             System.out.print("Betting amount(no higher than the amount you have): ");
             risk = scan.nextInt();
         }
-        game.subtractFromStartAmount(risk);
-        System.out.println("Start amount: "+ game.getStartAmount());
+        System.out.println("Start amount: "+ s);
         game.play(risk);
         System.out.println("Total Winnings: $" + game.getWinnings());
         System.out.println("Total Amount: $" + game.getStartAmount());

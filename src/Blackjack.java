@@ -3,26 +3,18 @@ import java.util.Scanner;
 public class Blackjack {
     private int startAmount; //amount of money to begin with to bet
     private boolean bust = false; //boolean that will determine when the game is over
-    private int score = 0;
-    private int  winnings;
+    private int  winnings = 0;
 
 
     public Blackjack(){
         startAmount = 500;
-        winnings = startAmount;
     }
     //constructor with a parameter for start amount
     public Blackjack(int a){
         startAmount = a;
-        winnings = a;
     }
     public void intro(){
-        System.out.println("Welcome to Blackjack!");
-        System.out.println("This is a game of both reasoning and luck.");
-        System.out.println("You will first be asked how much money you want to bet.");
-        System.out.println("Then, you will be dealt your hand and will be asked to either hit or stand.");
-        System.out.println("In this game, Aces are only worth 1 point.");
-        System.out.println("The person closest to 21 wins!");
+        System.out.println("Welcome to Blackjack!\nThis is a game of both reasoning and luck.\nYou will first be asked how much money you want to bet.\nThen, you will be dealt your hand and will be asked to either hit or stand.\nIn this game, Aces are only worth 1 point.\nThe person closest to 21 wins!");
     }
 
     public String pickCard(){
@@ -39,15 +31,14 @@ public class Blackjack {
                 return "Ace.Diamonds";
             }
         } else if (randomize>1 && randomize<11){
-            String s = Integer.toString(randomize);
             if (randomize2 == 0){
-                return s + ".Spades";
+                return randomize + ".Spades";
             } else if (randomize2 == 1){
-                return s + ".Clubs";
+                return randomize + ".Clubs";
             } else if (randomize2 == 2){
-                return s + ".Hearts";
+                return randomize + ".Hearts";
             } else {
-                return s + ".Diamonds";
+                return randomize + ".Diamonds";
             }
         } else if (randomize==11){
             if (randomize2 == 0){
@@ -145,14 +136,12 @@ public class Blackjack {
                 int val = valueConverter(getCard(nextCard));
                 System.out.println("Your new card is: " + getCard(nextCard) + " of " + getSuit(nextCard));
                 pCombined += val;
+                System.out.println("That brings your combined value to: " + pCombined);
                 if (pCombined>21){
                     System.out.println("That is a bust! You lose.");
                     startAmount-=risk;
                     winnings-=risk;
                     bust = true;
-                } else {
-                    pCombined += val;
-                    System.out.println("Your new combined value is: " + pCombined);
                 }
             } else {
                 System.out.println("Ok, your final value is: " + pCombined);
@@ -171,6 +160,8 @@ public class Blackjack {
             }
         }
         System.out.println();
+        System.out.println("The computer's combined value is: " + dCombined);
+        System.out.println("Your combined value is: " + pCombined);
 
         if (!bust && dCombined>21){
             System.out.println("You win!");
