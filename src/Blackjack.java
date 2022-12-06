@@ -1,22 +1,43 @@
 import java.util.Scanner;
 
+/**
+ * The Blackjack class represents a simulated round of Blackjack. An instance of Blackjack represents a game
+ * with a starting amount of money and a total amount of winnings.
+ */
 public class Blackjack {
     private int startAmount;
     private boolean bust = false;
     private int  winnings = 0;
 
-
+    /**
+     * This creates an instance of the Blackjack class.
+     * This default constructor sets the starting money to a random integer from 1 to 1000.
+     */
     public Blackjack(){
         startAmount = (int)(Math.random()*1000+1);
     }
-    //constructor with a parameter for start amount
+
+    /**
+     * This constructor creates an instance of the Blackjack class.
+     *
+     * @param a represents the starting money for the game
+     */
     public Blackjack(int a){
         startAmount = a;
     }
+
+    /**
+     * Prints out a sequence of sentences that welcomes the user and provides instructions to the game.
+     */
     public void intro(){
         System.out.println("Welcome to Blackjack!\nThis is a game of both reasoning and luck.\nYou will first be asked how much money you want to bet.\nThen, you will be dealt your hand and will be asked to either hit or stand.\nIn this game, Aces are only worth 1 point.\nThe person closest to 21 wins!");
     }
 
+    /**
+     * This method returns a string that contains a random card selected from a standard deck of cards.
+     *
+     * @return returns a String formatted in card type + . + card suit
+     */
     public String pickCard(){
         int randomize = (int)(Math.random()*13)+1;
         int randomize2 = (int)(Math.random()*4);
@@ -72,29 +93,54 @@ public class Blackjack {
             }
         }
     }
+
+    /**
+     * Getter method for the current amount of money the user has.
+     * @return returns the variable 'startAmount'.
+     */
     public int getStartAmount(){
         return startAmount;
     }
 
+    /**
+     * Getter method for the amount the user has won/lost.
+     * @return returns the change of money the user has experienced.
+     */
     public int getWinnings(){
         return winnings;
     }
 
-    public void subtractFromStartAmount(int s){
-        startAmount-=s;
-    }
-
+    /**
+     * Setter method to change the winnings.
+     * @param s represents amount and direction of change.
+     */
     public void changeWinnings(int s){
         winnings +=s;
     }
+
+    /**
+     * Getter method that returns the type of card.
+     * @param s represents the string that the type is being derived from. Uses the pickCard string.
+     * @return returns a substring that represents the card type.
+     */
     public String getCard(String s){
         return s.substring(0, s.indexOf("."));
     }
 
+    /**
+     * Getter method that returns the card's suit.
+     * @param s represents the string that the suit is being derived from. Uses the pickCard method.
+     * @return returns a substring that represents the card's suit.
+     */
     public String getSuit(String s){
         return s.substring(s.indexOf(".")+1);
     }
 
+    /**
+     * Method that returns a corresponding value based on the card's type.
+     * @param s represents where the value is coming from. Uses the getCard method.
+     * @return returns an integer value that corresponds to the card's value.
+     */
     public int valueConverter(String s){
         if (s.equals("Ace")){
             return 1;
@@ -105,6 +151,11 @@ public class Blackjack {
         }
     }
 
+    /**
+     * Method that simulates the game from start to finish.
+     * Uses print methods to guide the user through the process.
+     * @param risk represents the amount of money that the user puts at stake to win or lose.
+     */
     public void play(int risk){
         Scanner classScan = new Scanner(System.in);
         String d1 = pickCard();
@@ -180,6 +231,10 @@ public class Blackjack {
         }
     }
 
+    /**
+     * toString method for the Blackjack class. This method returns a formatted String representing the user's winnings and their current amount of money.
+     * @return returns a string formatted in Winnings: winnings and Amount: amount
+     */
     public String toString(){
         return "Winnings: $" + winnings + "\nTotal Money: $" + startAmount;
     }
