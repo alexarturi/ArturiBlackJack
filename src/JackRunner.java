@@ -24,8 +24,7 @@ public class JackRunner {
             }
             System.out.println("Start amount: "+ s);
             game.play(risk);
-            System.out.println("Total Winnings: $" + game.getWinnings());
-            System.out.println("Total Amount: $" + game.getStartAmount());
+            System.out.println(game);
         } else {
             int money = 0;
             while (money<=0 || money >1000) {
@@ -46,8 +45,7 @@ public class JackRunner {
             }
             System.out.println("Start amount: "+ s);
             game.play(risk);
-            System.out.println("Total Winnings: $" + game.getWinnings());
-            System.out.println("Total Amount: $" + game.getStartAmount());
+            System.out.println(game);
         }
     }
 }

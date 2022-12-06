@@ -179,4 +179,8 @@ public class Blackjack {
             System.out.println("It is a draw");
         }
     }
+
+    public String toString(){
+        return "Winnings: $" + winnings + "\nTotal Money: $" + startAmount;
+    }
 }
