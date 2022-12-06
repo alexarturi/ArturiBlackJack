@@ -1,13 +1,13 @@
 import java.util.Scanner;
 
 public class Blackjack {
-    private int startAmount; //amount of money to begin with to bet
-    private boolean bust = false; //boolean that will determine when the game is over
+    private int startAmount;
+    private boolean bust = false;
     private int  winnings = 0;
 
 
     public Blackjack(){
-        startAmount = 500;
+        startAmount = (int)(Math.random()*1000+1);
     }
     //constructor with a parameter for start amount
     public Blackjack(int a){
